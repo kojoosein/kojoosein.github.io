@@ -1,17 +1,29 @@
-/* Dark, technical, restrained. Graphite base, one amber accent, generous
-   whitespace. Nothing decorative that isn't carrying information. */
+/* Dark and technical, but not grey-on-grey. The previous palette used a
+   single amber at low saturation against near-black, which reads as careful
+   from six inches away and as dull from across a room. Three changes:
+   a cooler, slightly lifted base so colour has something to sit against;
+   a brighter primary accent; and a second accent so headings, links and
+   status can differ from each other instead of all being the same muted
+   orange. */
 
 :root {
-  --bg: #0e1012;
-  --bg-1: #16191c;
-  --bg-2: #1d2125;
-  --line: #2a2f35;
-  --line-2: #3a4148;
-  --fg: #e8e9ea;
-  --fg-2: #a7adb4;
-  --fg-3: #767d85;
-  --accent: #d98a1f;
-  --accent-dim: #7a4f14;
+  --bg: #0b0e13;
+  --bg-1: #141922;
+  --bg-2: #1b222d;
+  --line: #2b3440;
+  --line-2: #3d4a5a;
+  --fg: #f2f4f7;
+  --fg-2: #b4bdc8;
+  --fg-3: #7d8794;
+
+  /* Primary: a hotter amber, enough chroma to survive on a dark field. */
+  --accent: #ff9f2e;
+  --accent-dim: #8a5410;
+  /* Secondary: cyan. Technical, reads as instrumentation rather than
+     decoration, and sits opposite the amber so the two never muddy. */
+  --accent-2: #3ddbd9;
+  --accent-2-dim: #10514f;
+  --ok: #4ade80;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --maxw: 1080px;
@@ -214,4 +226,106 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
 @media (max-width: 640px) {
   .about-lead { flex-direction: column; gap: 20px; }
   .portrait { width: 160px; height: 160px; flex-basis: auto; }
+}
+
+
+/* ---------- bolder surfaces ------------------------------------------------
+   Cards were flat panels separated by hairlines. A subtle top edge in the
+   accent gives each one a defined start, and the hover state now moves,
+   which is what makes a grid feel like something you can touch. */
+.card {
+  background: linear-gradient(180deg, var(--bg-1), var(--bg));
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-dim);
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+/* Section labels in cyan, headings in white, links in amber — three jobs,
+   three treatments, instead of one orange doing all of them. */
+.sec-label {
+  color: var(--accent-2);
+  letter-spacing: .14em;
+}
+
+/* ---------- status badges ---------- */
+.badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.badge.wip {
+  color: var(--accent);
+  background: rgba(255,159,46,.11);
+  border: 1px solid var(--accent-dim);
+}
+.badge.done {
+  color: var(--ok);
+  background: rgba(74,222,128,.10);
+  border: 1px solid rgba(74,222,128,.28);
+}
+
+/* ---------- tiles ----------------------------------------------------------
+   Stand-ins for photographs that do not exist yet. The point is that they
+   look chosen rather than missing: a reader should see a designed card, not
+   the file path where a picture was supposed to go. Each one derives a hue
+   from its slug, so projects stay visually distinct and a given project keeps
+   the same colour on every page. */
+.tile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  overflow: hidden;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, var(--bg-2) 0%, var(--bg-1) 60%, var(--bg) 100%);
+  border: 1px solid var(--line);
+}
+.tile.wide { aspect-ratio: 16/7; }
+.tile::before {
+  /* A faint engineering grid, angled. Reads as drawing paper, not texture. */
+  content: "";
+  position: absolute; inset: -30%;
+  background-image:
+    linear-gradient(var(--line-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: .22;
+  transform: rotate(-12deg);
+}
+.tile::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 90% at 12% 110%,
+              rgba(255,159,46,.30), transparent 62%);
+}
+.tile span {
+  position: relative;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+/* Alternate the accent so a grid of tiles is not one colour repeated. */
+.card:nth-child(even) .tile::after {
+  background: radial-gradient(120% 90% at 12% 110%,
+              rgba(61,219,217,.26), transparent 62%);
+}
+
+.badge.live {
+  color: var(--accent-2);
+  background: rgba(61,219,217,.10);
+  border: 1px solid var(--accent-2-dim);
 }

@@ -102,9 +102,14 @@
     // was already exported Y-up, or data-spin to add a yaw offset.
     const up = (el.dataset.up || "z").toLowerCase();
     const spin = parseFloat(el.dataset.spin || "0") * Math.PI / 180;
+    // Extra rotation about X, in degrees, applied after the Z-up correction.
+    // Some parts are modelled lying down because that is how they print; the
+    // orientation that prints well is rarely the orientation that reads well.
+    const tilt = parseFloat(el.dataset.tilt || "0") * Math.PI / 180;
 
     const frame = (obj) => {
       if (up === "z") obj.rotation.x = -Math.PI / 2;
+      if (tilt) obj.rotation.x += tilt;
       if (spin) obj.rotation.z += spin;
       // Measure after rotating so the box reflects the final orientation,
       // then recentre by shifting the wrapper rather than the rotated mesh.
