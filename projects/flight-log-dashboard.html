@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flight-Log Health Dashboard for ArduPilot — Kojo B. Osei-Ntansah</title>
+<meta name="description" content="Turning three years of my own flight logs into a tool that finds the failure before I do.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Kojo B. Osei-Ntansah</a>
+  <div class="links">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#personal">Projects</a>
+    <a href="../index.html#research">Research</a>
+    <a href="../files/resume.pdf">Résumé</a>
+  </div>
+</div></nav>
+
+<header class="proj-head"><div class="wrap">
+  <a class="back" href="../index.html#personal">← Back</a>
+  <h1>Flight-Log Health Dashboard for ArduPilot</h1>
+  <div class="proj-meta">
+    <span>Personal project</span>
+<span>Developer</span>    <span>Aug 2026 – Present</span>
+  </div>
+  <p class="lede">Turning three years of my own flight logs into a tool that finds the failure before I do.</p>
+</div></header>
+
+<div class="wrap" style="padding-top:34px">
+  <div class="slot" style="aspect-ratio:16/7;border-radius:8px">Hero image
+    <span class="slot-path"></span>
+    <span class="slot-hint">drop the file in and rebuild — no code change needed</span>
+  </div>
+</div>
+
+<div class="block"><div class="wrap">
+  <h3>The problem</h3>
+  <p style="font-size:17.5px;line-height:1.65">Every flight I have debugged started the same way: scrolling a log by hand looking for the moment something changed. That is a task a computer should do. I am building the tool I wish I had had, using my own archive of real failures as the test set — if it cannot find the GNSS glitch I already know is in there, it is not working.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>What I did</h3>
+  <p>In-progress tool that ingests ArduPilot BIN/CSV flight logs and reports vibration levels, EKF innovations, GPS quality, battery and current draw, motor-output balance, commanded vs. actual attitude, failsafe events, and waypoint error — with automatic anomaly flagging. Built against a real corpus: the GNSS glitches, EKF resets, yaw imbalance, and thrust-loss warnings from three years of my own flight testing serve as the labeled cases.</p>
+</div></div>
+
+
+
+
+
+<div class="block"><div class="wrap">
+  <h3>Stack</h3>
+  <div class="tags">
+    <span class="tag">software-tooling</span>
+    <span class="tag">python</span>
+    <span class="tag">data-pipeline</span>
+    <span class="tag">ardupilot</span>
+    <span class="tag">uav</span>
+    <span class="tag">flight-test</span>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="back" href="../index.html#personal">← All projects</a>
+  <div class="foot-links">
+    <a href="mailto:koseintansah3@gatech.edu">koseintansah3@gatech.edu</a>
+<a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
+</div></footer>
+
+<script src="../assets/viewer.js"></script>
+</body>
+</html>

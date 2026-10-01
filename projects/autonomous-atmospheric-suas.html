@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomous sUAS for High-Resolution Atmospheric Sensing (GUAVAS) — Kojo B. Osei-Ntansah</title>
+<meta name="description" content="A quadrotor that flies its own sampling patterns while logging particulate data, so an atmospheric measurement can be repeated instead of re-flown.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Kojo B. Osei-Ntansah</a>
+  <div class="links">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#personal">Projects</a>
+    <a href="../index.html#research">Research</a>
+    <a href="../files/resume.pdf">Résumé</a>
+  </div>
+</div></nav>
+
+<header class="proj-head"><div class="wrap">
+  <a class="back" href="../index.html#work">← Back</a>
+  <h1>Autonomous sUAS for High-Resolution Atmospheric Sensing (GUAVAS)</h1>
+  <div class="proj-meta">
+    <span>@FTERLab, Applied Fluids and Thermal Engineering Research Laboratory, Howard University</span>
+<span>Student Researcher</span>    <span>Jun 2024 – Jul 2026</span>
+  </div>
+  <p class="lede">A quadrotor that flies its own sampling patterns while logging particulate data, so an atmospheric measurement can be repeated instead of re-flown.</p>
+</div></header>
+
+<div class="wrap" style="padding-top:34px">
+  <div class="slot" style="aspect-ratio:16/7;border-radius:8px">Hero image
+    <span class="slot-path">assets/img/quads.jpg</span>
+    <span class="slot-hint">drop the file in and rebuild — no code change needed</span>
+  </div>
+</div>
+
+<div class="block"><div class="wrap">
+  <h3>The problem</h3>
+  <p style="font-size:17.5px;line-height:1.65">Atmospheric measurements from a manually flown drone are hard to reproduce — pilot variation changes speed, altitude, and dwell, and with them what the sensor actually sampled. I built the autonomous version of the platform: mission logic on a companion computer, sensor acquisition synchronized to flight state, and a staged test process that earned each step from simulation to full sampling flights. The failures taught the most — GNSS degradation when the Pi powered up, an EKF reset mid-mission — each one a lesson in isolating software from power, EMI, and propulsion causes.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>What I did</h3>
+  <ul>
+    <li>Developed Python and DroneKit mission software on a Raspberry Pi companion computer commanding a Cube Orange autopilot over MAVLink, automating four repeatable sampling geometries and removing the pilot to pilot variation that had made the lab's atmospheric measurements difficult to reproduce.</li>
+    <li>Ran the Alphasense OPC-N3 as a supervised subprocess with a file handshake start and stop, confirming logging had initialized before the vehicle proceeded and closing files cleanly on abort, eliminating the corrupted datasets that had previously cost the team entire flights.</li>
+    <li>Executed 50+ flight tests over three years across five quadrotor platforms, advancing each capability through a staged risk reduction process from SITL simulation and propellers off bench checks to full autonomous sampling flights.</li>
+    <li>Diagnosed field failures from flight logs, including GNSS and EKF degradation traced to companion computer electromagnetic interference, yaw imbalance, and potential thrust loss warnings, isolating power, calibration, and propulsion causes to return aircraft to service between test campaigns.</li>
+  </ul>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>Results</h3>
+  <div class="metrics">
+    <div class="metric">First-author paper at AIAA SciTech 2026</div>
+    <div class="metric">50+ flight tests over 3 years on 5 quadrotor platforms: DJI Matrice 100, DJI Mini 2 SE, Hexsoon EDU-450 and EDU-650, ASW ILM</div>
+    <div class="metric">4 reusable autonomous sampling patterns (hover, box, zigzag, boustrophedon) flown with concurrent particulate logging</div>
+    <div class="metric">8-step risk-reduction ladder from software checks and SITL to full sampling flights</div>
+  </div>
+</div></div>
+
+
+
+<div class="block"><div class="wrap">
+  <h3>What went wrong</h3>
+  <p style="font-size:17px">GNSS accuracy degraded whenever the companion computer powered up, and one mission logged an EKF3 IMU reset. Isolating that meant separating software faults from power, EMI, mass balance, vibration, and propulsion causes — changing one variable at a time until the cause had nowhere left to hide.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>Stack</h3>
+  <div class="tags">
+    <span class="tag">autonomy</span>
+    <span class="tag">suas</span>
+    <span class="tag">atmospheric-sensing</span>
+    <span class="tag">ardupilot</span>
+    <span class="tag">mavlink</span>
+    <span class="tag">dronekit</span>
+    <span class="tag">python</span>
+    <span class="tag">raspberry-pi</span>
+    <span class="tag">cube-orange</span>
+    <span class="tag">flight-test</span>
+    <span class="tag">sitl</span>
+    <span class="tag">mission-planner</span>
+    <span class="tag">publications</span>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="back" href="../index.html#work">← All projects</a>
+  <div class="foot-links">
+    <a href="mailto:koseintansah3@gatech.edu">koseintansah3@gatech.edu</a>
+<a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
+</div></footer>
+
+<script src="../assets/viewer.js"></script>
+</body>
+</html>

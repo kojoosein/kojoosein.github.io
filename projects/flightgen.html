@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flightgen: Web Application for Autonomous Mission Generation and Control — Kojo B. Osei-Ntansah</title>
+<meta name="description" content="A browser served from the aircraft itself that generates, launches, monitors, and aborts autonomous missions, so flying a controlled pattern does not require a laptop full of scripts.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Kojo B. Osei-Ntansah</a>
+  <div class="links">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#personal">Projects</a>
+    <a href="../index.html#research">Research</a>
+    <a href="../files/resume.pdf">Résumé</a>
+  </div>
+</div></nav>
+
+<header class="proj-head"><div class="wrap">
+  <a class="back" href="../index.html#personal">← Back</a>
+  <h1>flightgen: Web Application for Autonomous Mission Generation and Control</h1>
+  <div class="proj-meta">
+    <span>@FTERLab, Applied Fluids and Thermal Engineering Research Laboratory, Howard University</span>
+<span>Student Researcher</span>    <span>Jan 2025 – Jul 2026</span>
+  </div>
+  <p class="lede">A browser served from the aircraft itself that generates, launches, monitors, and aborts autonomous missions, so flying a controlled pattern does not require a laptop full of scripts.</p>
+</div></header>
+
+<div class="wrap" style="padding-top:34px">
+  <div class="slot" style="aspect-ratio:16/7;border-radius:8px">Hero image
+    <span class="slot-path"></span>
+    <span class="slot-hint">drop the file in and rebuild — no code change needed</span>
+  </div>
+</div>
+
+<div class="block"><div class="wrap">
+  <h3>The problem</h3>
+  <p style="font-size:17.5px;line-height:1.65">Hand building missions in a ground station invites operator error into an experiment. flightgen made the geometry a parameter instead, and putting it in a browser served from the aircraft itself meant anyone in the lab could fly a controlled pattern in the field without a laptop full of scripts. The part I care about is the abort path: the mission runs in its own process group so one click kills everything it spawned, and the emergency behavior lives on the flight controller, not on a Raspberry Pi that might be the thing that failed.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>What I did</h3>
+  <ul>
+    <li>Built flightgen, a Flask web application deployed as a systemd service on the aircraft's Raspberry Pi and reached over the drone's own Wi-Fi network, letting an operator generate, launch, monitor, and abort an autonomous mission from a browser in the field without touching a terminal.</li>
+    <li>Generated standalone DroneKit mission scripts from pattern parameters for hover, box, lawnmower, and polygon geometries, converting local north and east offsets to geographic waypoints and ending each leg on an arrival distance check rather than a fixed timer.</li>
+    <li>Implemented run control that launches each mission in its own process group so a single abort terminates the whole process family, including the particulate sensor's child process, with a background thread streaming live mission output to the browser and a lock preventing two operators from starting a flight at once.</li>
+    <li>Wrote a separate abort path that commands LAND or RTL and confirms the flight controller actually changed mode, keeping emergency behavior on the autopilot rather than depending on the companion computer staying alive.</li>
+  </ul>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>Results</h3>
+  <div class="metrics">
+    <div class="metric">6 pattern geometries (hover, box, zigzag, boustrophedon, transect, formation points) from configurable parameters</div>
+  </div>
+</div></div>
+
+
+
+<div class="block"><div class="wrap">
+  <h3>What went wrong</h3>
+  <p style="font-size:17px">The abort path drove the architecture. A mission spawns the sensor logger as its own child, so killing just the mission would leave the sensor running. Each mission now launches in its own process group and one abort takes down the whole family, while LAND and RTL are commanded on the flight controller so the emergency behavior does not depend on the companion computer still being alive.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>Stack</h3>
+  <div class="tags">
+    <span class="tag">autonomy</span>
+    <span class="tag">python</span>
+    <span class="tag">mavlink</span>
+    <span class="tag">dronekit</span>
+    <span class="tag">suas</span>
+    <span class="tag">atmospheric-sensing</span>
+    <span class="tag">software-tooling</span>
+    <span class="tag">web-development</span>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="back" href="../index.html#personal">← All projects</a>
+  <div class="foot-links">
+    <a href="mailto:koseintansah3@gatech.edu">koseintansah3@gatech.edu</a>
+<a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
+</div></footer>
+
+<script src="../assets/viewer.js"></script>
+</body>
+</html>

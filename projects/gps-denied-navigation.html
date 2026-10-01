@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPS-Denied Visual Navigation Testbed — Kojo B. Osei-Ntansah</title>
+<meta name="description" content="Position estimation when GNSS is not available — a vehicle that only knows where it is when the sky cooperates is supervised, not autonomous.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Kojo B. Osei-Ntansah</a>
+  <div class="links">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#personal">Projects</a>
+    <a href="../index.html#research">Research</a>
+    <a href="../files/resume.pdf">Résumé</a>
+  </div>
+</div></nav>
+
+<header class="proj-head"><div class="wrap">
+  <a class="back" href="../index.html#personal">← Back</a>
+  <h1>GPS-Denied Visual Navigation Testbed</h1>
+  <div class="proj-meta">
+    <span>Personal project</span>
+<span>Developer</span>    <span>Aug 2026 – Present</span>
+  </div>
+  <p class="lede">Position estimation when GNSS is not available — a vehicle that only knows where it is when the sky cooperates is supervised, not autonomous.</p>
+</div></header>
+
+<div class="wrap" style="padding-top:34px">
+  <div class="slot" style="aspect-ratio:16/7;border-radius:8px">Hero image
+    <span class="slot-path"></span>
+    <span class="slot-hint">drop the file in and rebuild — no code change needed</span>
+  </div>
+</div>
+
+<div class="block"><div class="wrap">
+  <h3>The problem</h3>
+  <p style="font-size:17.5px;line-height:1.65">GNSS fails indoors, under canopy, near structures, and wherever someone wants it to. A vehicle that only knows where it is when the sky cooperates is not autonomous — it is supervised. This testbed is how I am learning the estimation side of that problem with hardware I already own.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>What I did</h3>
+  <p>In-progress GPS-denied navigation testbed: camera calibration, then AprilTag and ArUco pose estimation, transformed into the vehicle body/NED frame, timestamped, and sent to a Cube Orange as MAVLink vision-position messages with EKF source selection configured to accept them. Later phases add optical-flow odometry with rangefinder scale and drift evaluation over closed paths. Validated on a staged ladder from bench markers to restrained motion to flight.</p>
+</div></div>
+
+
+
+
+
+<div class="block"><div class="wrap">
+  <h3>Stack</h3>
+  <div class="tags">
+    <span class="tag">computer-vision</span>
+    <span class="tag">visual-odometry</span>
+    <span class="tag">state-estimation</span>
+    <span class="tag">autonomy</span>
+    <span class="tag">uav</span>
+    <span class="tag">python</span>
+    <span class="tag">opencv</span>
+    <span class="tag">raspberry-pi</span>
+    <span class="tag">cube-orange</span>
+    <span class="tag">mavlink</span>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="back" href="../index.html#personal">← All projects</a>
+  <div class="foot-links">
+    <a href="mailto:koseintansah3@gatech.edu">koseintansah3@gatech.edu</a>
+<a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
+</div></footer>
+
+<script src="../assets/viewer.js"></script>
+</body>
+</html>

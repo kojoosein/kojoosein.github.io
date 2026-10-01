@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UAV-Based Radio Telemetry for Wildlife Tracking (Motus Network) — Kojo B. Osei-Ntansah</title>
+<meta name="description" content="Finding radio-tagged birds from a quadcopter: an extended Kalman filter that turns signal strength into a position, and flight paths chosen to make that estimate converge faster.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Kojo B. Osei-Ntansah</a>
+  <div class="links">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#personal">Projects</a>
+    <a href="../index.html#research">Research</a>
+    <a href="../files/resume.pdf">Résumé</a>
+  </div>
+</div></nav>
+
+<header class="proj-head"><div class="wrap">
+  <a class="back" href="../index.html#work">← Back</a>
+  <h1>UAV-Based Radio Telemetry for Wildlife Tracking (Motus Network)</h1>
+  <div class="proj-meta">
+    <span>Aerial Robotics and Experimental Autonomy Lab (AREAL), Georgia Institute of Technology</span>
+<span>Graduate Research Assistant</span>    <span>Aug 2026 – Present</span>
+  </div>
+  <p class="lede">Finding radio-tagged birds from a quadcopter: an extended Kalman filter that turns signal strength into a position, and flight paths chosen to make that estimate converge faster.</p>
+</div></header>
+
+<div class="wrap" style="padding-top:34px">
+  <div class="slot" style="aspect-ratio:16/7;border-radius:8px">Hero image
+    <span class="slot-path">assets/img/motus-receiver.jpg</span>
+    <span class="slot-hint">drop the file in and rebuild — no code change needed</span>
+  </div>
+</div>
+
+<div class="block"><div class="wrap">
+  <h3>The problem</h3>
+  <p style="font-size:17.5px;line-height:1.65">Finding a tagged bird from the air is an estimation problem disguised as a radio problem. The receiver tells you roughly how strong a signal was, not where it came from, and the aircraft that carries the receiver is also the thing generating the noise that drowns it. Where the drone flies determines what the filter can learn, which is what makes the flight path part of the estimator rather than a separate decision.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>What I did</h3>
+  <ul>
+    <li>Extending an extended Kalman filter for range-only localization of radio-tagged birds from RSSI, using a log-distance path-loss measurement model built from measured sensor data rather than assumed propagation constants.</li>
+    <li>Addressing the estimator limits that range-only geometry imposes: censored below-threshold measurements, the information carried by missed detections, and mirror ambiguity in the range-only solution.</li>
+    <li>Investigating observability-aware flight planning to improve localization over standard lawnmower sweep patterns, evaluated through Monte Carlo trade studies on flight speed, tag burst interval, and detection range using behavior-based bird motion models.</li>
+    <li>Characterizing receiver detection performance against range, antenna orientation, vehicle attitude, SDR gain, and environment through controlled flight and ground tests, and diagnosing unit-to-unit range variation across identical receivers by isolating vibration, gain control, and antenna-mounting effects.</li>
+    <li>Developing the drone-mounted, Motus-compatible VHF receiver behind the measurement (SensorGnome, Raspberry Pi, SDR, GPS), evaluating RF front-end components (SDRs, LNAs, bandpass filters, whip and Yagi antennas) for signal-to-noise ratio, and integrating the payload with a Holybro X500 V2 airframe while balancing mass, endurance, antenna placement, and onboard RF noise.</li>
+  </ul>
+</div></div>
+
+
+
+
+<div class="block"><div class="wrap">
+  <h3>What went wrong</h3>
+  <p style="font-size:17px">Identical receivers did not perform identically — detection range varied unit to unit with no obvious cause. Separating that meant ruling out vibration, automatic gain control, and antenna mounting one at a time, on hardware where the aircraft carrying the receiver is also the loudest source of noise near it.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>Stack</h3>
+  <div class="tags">
+    <span class="tag">uav</span>
+    <span class="tag">suas</span>
+    <span class="tag">autonomy</span>
+    <span class="tag">state-estimation</span>
+    <span class="tag">kalman-filtering</span>
+    <span class="tag">localization</span>
+    <span class="tag">radio-telemetry</span>
+    <span class="tag">sdr</span>
+    <span class="tag">rf-systems</span>
+    <span class="tag">payload-integration</span>
+    <span class="tag">flight-test</span>
+    <span class="tag">systems-integration</span>
+    <span class="tag">path-planning</span>
+    <span class="tag">monte-carlo</span>
+    <span class="tag">python</span>
+    <span class="tag">matlab</span>
+    <span class="tag">raspberry-pi</span>
+    <span class="tag">px4</span>
+    <span class="tag">linux</span>
+    <span class="tag">part-107</span>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="back" href="../index.html#work">← All projects</a>
+  <div class="foot-links">
+    <a href="mailto:koseintansah3@gatech.edu">koseintansah3@gatech.edu</a>
+<a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
+</div></footer>
+
+<script src="../assets/viewer.js"></script>
+</body>
+</html>

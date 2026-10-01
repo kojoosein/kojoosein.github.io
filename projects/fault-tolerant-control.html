@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adaptive Fault-Tolerant Flight Control for Elevon Failure — Kojo B. Osei-Ntansah</title>
+<meta name="description" content="Detecting a failed elevon from the aircraft's own response, then reallocating control authority fast enough to keep flying.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Kojo B. Osei-Ntansah</a>
+  <div class="links">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#personal">Projects</a>
+    <a href="../index.html#research">Research</a>
+    <a href="../files/resume.pdf">Résumé</a>
+  </div>
+</div></nav>
+
+<header class="proj-head"><div class="wrap">
+  <a class="back" href="../index.html#work">← Back</a>
+  <h1>Adaptive Fault-Tolerant Flight Control for Elevon Failure</h1>
+  <div class="proj-meta">
+    <span>Aerial Robotics and Experimental Autonomy Lab (AREAL), Georgia Institute of Technology</span>
+<span>SURE Research Intern</span>    <span>May 2024 – Aug 2024</span>
+  </div>
+  <p class="lede">Detecting a failed elevon from the aircraft's own response, then reallocating control authority fast enough to keep flying.</p>
+</div></header>
+
+<div class="wrap" style="padding-top:34px">
+  <div class="slot" style="aspect-ratio:16/7;border-radius:8px">Hero image
+    <span class="slot-path"></span>
+    <span class="slot-hint">drop the file in and rebuild — no code change needed</span>
+  </div>
+</div>
+
+<div class="block"><div class="wrap">
+  <h3>The problem</h3>
+  <p style="font-size:17.5px;line-height:1.65">An aircraft with elevons uses the same surfaces for pitch and roll, so a jammed elevon couples both axes at once. At AREAL I supported the estimation and test planning side of that problem and owned the physical side, iterating a rudder redesign three times, because control theory ends at a servo horn with real geometry. That summer is what drew me back to the lab for my PhD.</p>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>What I did</h3>
+  <ul>
+    <li>Supported a Kalman filter based fault estimation effort for fixed wing elevon failure in MATLAB and Simulink, working through how comparing expected against observed aircraft response lets a degraded control surface be detected and its authority reallocated in flight.</li>
+    <li>Helped prepare the test plan for hardware in the loop simulation, defining the setup needed to expose the timing and interface behavior that pure software simulation cannot show.</li>
+    <li>Developed and iterated a rudder redesign through 3 CAD revisions, evaluating control surface area, moment arm, hinge placement, and servo linkage geometry to recover control authority lost to the failed elevon.</li>
+  </ul>
+</div></div>
+
+<div class="block"><div class="wrap">
+  <h3>Results</h3>
+  <div class="metrics">
+    <div class="metric">~3 design iterations of a rudder redesign connecting control authority to physical actuation</div>
+  </div>
+</div></div>
+
+
+
+
+<div class="block"><div class="wrap">
+  <h3>Stack</h3>
+  <div class="tags">
+    <span class="tag">flight-controls</span>
+    <span class="tag">fault-tolerant-control</span>
+    <span class="tag">state-estimation</span>
+    <span class="tag">kalman-filtering</span>
+    <span class="tag">hitl</span>
+    <span class="tag">matlab</span>
+    <span class="tag">simulink</span>
+    <span class="tag">python</span>
+    <span class="tag">cad</span>
+    <span class="tag">guidance-navigation-control</span>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="back" href="../index.html#work">← All projects</a>
+  <div class="foot-links">
+    <a href="mailto:koseintansah3@gatech.edu">koseintansah3@gatech.edu</a>
+<a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
+</div></footer>
+
+<script src="../assets/viewer.js"></script>
+</body>
+</html>
