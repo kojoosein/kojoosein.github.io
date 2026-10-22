@@ -48,11 +48,28 @@
     <a class="btn" href="files/resume_detailed.pdf">Detailed résumé</a>
 <a class="btn" href="files/cv.pdf">CV</a>  </div>
   </div>
-  <figure class="hero-photo">
-    <img id="heroPhoto" src="assets/img/lab-quadrotor.jpg"
-         alt="Kojo B. Osei-Ntansah"
-         data-rotate='["assets/img/lab-quadrotor.jpg", "assets/img/lab-bench.jpg", "assets/img/flying-controls.jpg", "assets/img/cockpit-cruise.jpg"]'
-         data-base="">
+  <figure class="hero-photo" id="heroGallery"
+          data-rotate='["assets/img/lab-quadrotor.jpg", "assets/img/lab-laptop.jpg", "assets/img/lab-seated.jpg", "assets/img/lab-bench.jpg", "assets/img/flying-controls.jpg", "assets/img/aircraft-standing.jpg", "assets/img/ramp.jpg"]' data-base="">
+    <img class="slide on" src="assets/img/lab-quadrotor.jpg" alt="Kojo B. Osei-Ntansah">
+    <img class="slide" alt="">
+    <button class="hero-nav prev" type="button" aria-label="Previous photo">&#8249;</button>
+    <button class="hero-nav next" type="button" aria-label="Next photo">&#8250;</button>
+    <div class="hero-dots" role="tablist">
+      <button type="button" role="tab" aria-label="Photo 1"
+aria-selected="true"></button>
+      <button type="button" role="tab" aria-label="Photo 2"
+></button>
+      <button type="button" role="tab" aria-label="Photo 3"
+></button>
+      <button type="button" role="tab" aria-label="Photo 4"
+></button>
+      <button type="button" role="tab" aria-label="Photo 5"
+></button>
+      <button type="button" role="tab" aria-label="Photo 6"
+></button>
+      <button type="button" role="tab" aria-label="Photo 7"
+></button>
+    </div>
   </figure>
 </div>
 </div></header>
@@ -349,31 +366,74 @@
 
 <script>
 (function () {
-  var img = document.getElementById("heroPhoto");
-  if (!img) return;
-  var list;
-  try { list = JSON.parse(img.dataset.rotate || "[]"); } catch (e) { return; }
-  if (list.length < 2) return;
-  var base = img.dataset.base || "";
+  var g = document.getElementById("heroGallery");
+  if (!g) return;
+  var list; try { list = JSON.parse(g.dataset.rotate || "[]"); } catch (e) { return; }
+  if (!list.length) return;
 
-  // Start somewhere random so the page is not the same twice running.
-  var i = Math.floor(Math.random() * list.length);
-  img.src = base + list[i];
+  var base  = g.dataset.base || "";
+  var imgs  = g.querySelectorAll(".slide");
+  var dots  = g.querySelectorAll(".hero-dots button");
+  var front = 0;                       // which of the two layers is showing
+  var i     = Math.floor(Math.random() * list.length);
+  var timer = null;
 
-  // Respect the setting. Someone who has asked the OS to stop animations has
-  // asked for a reason, and a cross-fading photograph is an animation.
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  imgs[0].src = base + list[i];
+  mark();
 
-  setInterval(function () {
-    i = (i + 1) % list.length;
-    var next = new Image();
-    // Swap only once the replacement has decoded, or the fade shows a gap.
-    next.onload = function () {
-      img.style.opacity = "0";
-      setTimeout(function () { img.src = next.src; img.style.opacity = "1"; }, 450);
+  function mark() {
+    for (var d = 0; d < dots.length; d++) {
+      if (d === i) dots[d].setAttribute("aria-selected", "true");
+      else dots[d].removeAttribute("aria-selected");
+    }
+  }
+
+  function show(n) {
+    n = (n + list.length) % list.length;
+    if (n === i) return;
+    i = n;
+    var back = imgs[1 - front];
+    var pre = new Image();
+    // Decode before showing, so a slow frame never flashes a blank panel.
+    pre.onload = function () {
+      back.src = pre.src;
+      back.classList.add("on");
+      imgs[front].classList.remove("on");
+      front = 1 - front;
+      mark();
     };
-    next.src = base + list[i];
-  }, 7000);
+    pre.src = base + list[i];
+  }
+
+  // Auto-advance until the reader takes over, then stop for good: continuing
+  // to move the photo after someone has chosen one is just taking it away.
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && list.length > 1) timer = setInterval(function () { show(i + 1); }, 7000);
+
+  var prev = g.querySelector(".prev"), next = g.querySelector(".next");
+  if (prev) prev.onclick = function () { stop(); show(i - 1); };
+  if (next) next.onclick = function () { stop(); show(i + 1); };
+  for (var d = 0; d < dots.length; d++) {
+    (function (n) { dots[n].onclick = function () { stop(); show(n); }; })(d);
+  }
+
+  // Arrow keys once the gallery has focus.
+  g.tabIndex = 0;
+  g.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft")  { stop(); show(i - 1); }
+    if (e.key === "ArrowRight") { stop(); show(i + 1); }
+  });
+
+  // Swipe. 40 px threshold so a vertical scroll does not change the photo.
+  var x0 = null;
+  g.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, {passive: true});
+  g.addEventListener("touchend", function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) { stop(); show(dx < 0 ? i + 1 : i - 1); }
+    x0 = null;
+  }, {passive: true});
 })();
 </script>
 </body>
