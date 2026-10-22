@@ -329,3 +329,51 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
   background: rgba(61,219,217,.10);
   border: 1px solid var(--accent-2-dim);
 }
+
+/* ---------- hero with a photograph ----------------------------------------
+   Two columns: the copy keeps its reading width, the photo takes the rest.
+   The panel has a fixed aspect so portrait and landscape sources both work —
+   object-fit crops rather than letterboxes, and the focal point sits high
+   because in every one of these the subject is in the upper half. */
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 44px;
+  align-items: center;
+}
+.hero-copy { min-width: 0; }
+
+.hero-photo {
+  margin: 0;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-1);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  display: block;
+  opacity: 1;
+  transition: opacity .45s ease;
+}
+/* A gradient along the inside edge so the photo meets the page instead of
+   stopping at a hard rectangle against the dark background. */
+.hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(11,14,19,.55) 0%, transparent 42%);
+}
+
+@media (max-width: 860px) {
+  .hero-split { grid-template-columns: 1fr; gap: 26px; }
+  /* Photo under the copy on a phone: the name should still be the first
+     thing read, not something scrolled past a picture to reach. */
+  .hero-photo { aspect-ratio: 16 / 11; order: 2; }
+}

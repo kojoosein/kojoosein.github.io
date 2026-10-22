@@ -25,6 +25,8 @@
 </div></nav>
 
 <header class="hero"><div class="wrap">
+<div class="hero-split">
+  <div class="hero-copy">
   <div class="tagline">Mechanical engineer · Aerospace Engineering PhD student · Georgia Tech · Howard University</div>
   <h1>Designing aircraft. Building systems. Testing in flight.</h1>
   <p class="intro">My name is Kojo Osei-Ntansah. I am a mechanical engineer and a PhD student in Aerospace Engineering at Georgia Tech, advised by Dr. Jonathan Rogers in the Aerial Robotics and Experimental Autonomy Lab. I design, build, and test small uncrewed aircraft, working across aircraft structures, autonomy software, payload integration, and flight test.</p>
@@ -45,6 +47,14 @@
     <a class="btn" href="files/resume.pdf">Résumé</a>
     <a class="btn" href="files/resume_detailed.pdf">Detailed résumé</a>
 <a class="btn" href="files/cv.pdf">CV</a>  </div>
+  </div>
+  <figure class="hero-photo">
+    <img id="heroPhoto" src="assets/img/lab-quadrotor.jpg"
+         alt="Kojo B. Osei-Ntansah"
+         data-rotate='["assets/img/lab-quadrotor.jpg", "assets/img/lab-bench.jpg", "assets/img/flying-controls.jpg", "assets/img/cockpit-cruise.jpg"]'
+         data-base="">
+  </figure>
+</div>
 </div></header>
 
 <section id="about"><div class="wrap">
@@ -133,7 +143,7 @@
     </a>
     <a class="card" href="projects/autonomous-atmospheric-suas.html">
       <div class="thumb">
-        <div class="tile" data-seed="autonomous-atmospheric-suas"><span>@FTERLab</span></div>
+        <img src="assets/img/quads.jpg" alt="Autonomous sUAS for High-Resolution Atmospheric Sensing (GUAVAS)">
       </div>
       <div class="body">
         <h3>Autonomous sUAS for High-Resolution Atmospheric Sensing (GUAVAS)</h3>
@@ -337,5 +347,34 @@
 <a href="https://linkedin.com/in/kojooseintansah">LinkedIn</a><a href="https://scholar.google.com/citations?user=qtYpRK8AAAAJ">Scholar</a>  </div>
 </div></footer>
 
+<script>
+(function () {
+  var img = document.getElementById("heroPhoto");
+  if (!img) return;
+  var list;
+  try { list = JSON.parse(img.dataset.rotate || "[]"); } catch (e) { return; }
+  if (list.length < 2) return;
+  var base = img.dataset.base || "";
+
+  // Start somewhere random so the page is not the same twice running.
+  var i = Math.floor(Math.random() * list.length);
+  img.src = base + list[i];
+
+  // Respect the setting. Someone who has asked the OS to stop animations has
+  // asked for a reason, and a cross-fading photograph is an animation.
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  setInterval(function () {
+    i = (i + 1) % list.length;
+    var next = new Image();
+    // Swap only once the replacement has decoded, or the fade shows a gap.
+    next.onload = function () {
+      img.style.opacity = "0";
+      setTimeout(function () { img.src = next.src; img.style.opacity = "1"; }, 450);
+    };
+    next.src = base + list[i];
+  }, 7000);
+})();
+</script>
 </body>
 </html>
