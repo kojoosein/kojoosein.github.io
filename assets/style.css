@@ -339,7 +339,10 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
   display: grid;
   /* Closer to even than before: the photo column was narrow enough that a
      landscape shot had to be cropped hard to fill it. */
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  /* The photo column gets the larger share now. The text beside it is two
+     paragraphs, not the whole hero, so it does not need the width — and the
+     photos were rendering smaller than they had to. */
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   gap: 40px;
   /* Stretch, not centre. Centring left the photo floating with dead space
      above and below it, because its height was fixed while the text column
