@@ -356,7 +356,11 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
      costs a little off the sides of the portraits and solves both. */
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  /* No fixed shape. The script sets aspect-ratio from whichever photo is
+     showing, so a wide shot gets a wide frame and a tall shot a tall one.
+     This value is only the fallback before the first image reports its size. */
+  aspect-ratio: 3 / 2;
+  transition: aspect-ratio .45s ease;
   outline: none;
 }
 .hero-photo .slide {
@@ -428,7 +432,7 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
 @media (max-width: 860px) {
   .hero-split { grid-template-columns: 1fr; gap: 24px; }
   /* Under the copy on a phone: the name reads first. */
-  .hero-photo { order: 2; aspect-ratio: 4 / 3; }
+  .hero-photo { order: 2; }
   .hero-photo .slide {
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
             mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);

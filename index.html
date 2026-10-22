@@ -379,6 +379,11 @@ aria-selected="true"></button>
   var timer = null;
 
   imgs[0].src = base + list[i];
+  // Reshape the frame to the photo. Without this the panel keeps one shape
+  // and a tall photo either letterboxes inside it or gets cropped by it.
+  function fit(w, h) { if (w && h) g.style.aspectRatio = w + " / " + h; }
+  if (imgs[0].complete) fit(imgs[0].naturalWidth, imgs[0].naturalHeight);
+  else imgs[0].onload = function () { fit(imgs[0].naturalWidth, imgs[0].naturalHeight); };
   mark();
 
   function mark() {
@@ -396,6 +401,7 @@ aria-selected="true"></button>
     var pre = new Image();
     // Decode before showing, so a slow frame never flashes a blank panel.
     pre.onload = function () {
+      fit(pre.naturalWidth, pre.naturalHeight);
       back.src = pre.src;
       back.classList.add("on");
       imgs[front].classList.remove("on");
