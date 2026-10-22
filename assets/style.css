@@ -336,9 +336,14 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
    read as a widget pasted on top rather than part of the page. */
 .hero-split {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  /* Closer to even than before: the photo column was narrow enough that a
+     landscape shot had to be cropped hard to fill it. */
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   gap: 40px;
-  align-items: center;
+  /* Stretch, not centre. Centring left the photo floating with dead space
+     above and below it, because its height was fixed while the text column
+     set the row height. */
+  align-items: stretch;
 }
 .hero-copy { min-width: 0; }
 
@@ -350,17 +355,21 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
      Right-aligned, because the right edge is the one against the page margin
      and the left edge is the soft one. */
   position: relative;
-  height: clamp(340px, 48vh, 540px);
+  /* Fill the row the text defines, with a floor so a short intro cannot
+     squash it. */
+  height: 100%;
+  min-height: 420px;
   outline: none;
 }
 .hero-photo .slide {
   position: absolute;
-  top: 0;
-  right: 0;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  width: auto;
-  max-width: 100%;
+  /* Fill the panel. The files are already cropped around you, so what cover
+     trims here is background, not subject. */
   object-fit: cover;
+  object-position: 50% 42%;
   opacity: 0;
   transition: opacity .5s ease;
   /* Mask on the image, not the frame: the frame is wider than a portrait
@@ -421,11 +430,9 @@ footer .foot-links { display: flex; gap: 20px; margin-top: 12px; font-family: va
 @media (max-width: 860px) {
   .hero-split { grid-template-columns: 1fr; gap: 24px; }
   /* Under the copy on a phone: the name reads first. */
-  .hero-photo { height: clamp(260px, 42vh, 380px); order: 2; }
+  .hero-photo { height: auto; min-height: 0; aspect-ratio: 16/11; order: 2; }
   .hero-photo .slide {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+    inset: 0;
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
             mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
   }
